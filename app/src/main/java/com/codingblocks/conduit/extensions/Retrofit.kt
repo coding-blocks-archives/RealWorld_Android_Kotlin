@@ -1,4 +1,4 @@
-package com.codingblocks.conduit.fragments
+package com.codingblocks.conduit.extensions
 
 import retrofit2.Call
 import retrofit2.Callback
