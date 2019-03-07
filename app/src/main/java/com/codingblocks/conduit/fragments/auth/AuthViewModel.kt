@@ -11,10 +11,11 @@ import com.codingblocks.conduit.data.UserLoginRequest
 import com.codingblocks.conduit.data.models.User
 import com.codingblocks.conduit.extensions.enqueue
 
-public const val PREFS_KEY_AUTH_TOKEN = "auth_token"
-
 class AuthViewModel(app: Application) : AndroidViewModel(app) {
-    val TAG = "API:USER"
+    companion object {
+        public const val PREFS_KEY_AUTH_TOKEN = "auth_token"
+        val TAG = "API:USER"
+    }
 
     val prefs: SharedPreferences
         get() = PreferenceManager.getDefaultSharedPreferences(

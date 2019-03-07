@@ -40,6 +40,7 @@ class LoginFragment : Fragment() {
             { lifecycle },
             {
                 Toast.makeText(context, "Logged in as " + it.username, Toast.LENGTH_SHORT).show()
+                activity?.supportFragmentManager?.popBackStack()
             }
         )
     }
