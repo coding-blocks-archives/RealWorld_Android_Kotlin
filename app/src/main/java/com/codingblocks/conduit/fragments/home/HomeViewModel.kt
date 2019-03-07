@@ -1,5 +1,6 @@
 package com.codingblocks.conduit.fragments.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import com.codingblocks.conduit.data.ConduitClient
@@ -16,7 +17,12 @@ class HomeViewModel : ViewModel() {
         ConduitClient.conduitApi.getArticles().enqueue { t, response ->
             response?.body()?.let {
                 globalFeed.postValue(it.articles)
-            }
+            } ?:
+            Log.e(
+                "HOME",
+                "Error downloading articles",
+                t
+            )
         }
     }
 
