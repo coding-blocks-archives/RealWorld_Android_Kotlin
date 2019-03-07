@@ -1,13 +1,14 @@
 package com.codingblocks.conduit.fragments.auth
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.codingblocks.conduit.R
+import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
 
@@ -27,7 +28,20 @@ class LoginFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        btnLogin.setOnClickListener {
+            viewModel.loginUser(
+                etEmail.text.toString(),
+                etPassword.text.toString()
+            )
+        }
+
+        viewModel.currentUser.observe(
+            { lifecycle },
+            {
+                Toast.makeText(context, "Logged in as " + it.username, Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
 }

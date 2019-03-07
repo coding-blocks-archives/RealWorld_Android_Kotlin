@@ -11,7 +11,7 @@
     <TextView
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
         android:textColor="@color/colorPrimary"
-        android:text="Login"
+        android:text="Register"
         android:gravity="center"
         android:textAlignment="center"
         android:layout_width="wrap_content"
@@ -33,5 +33,12 @@
         android:hint="Password"
         android:ems="15"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_marginTop="10dp"
+        android:text="Register"
+        style="@style/AppTheme.Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

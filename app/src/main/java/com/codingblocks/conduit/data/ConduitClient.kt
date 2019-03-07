@@ -6,9 +6,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ConduitClient {
+    var authToken: String? = null
 
     val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(2, TimeUnit.SECONDS)
+        .addInterceptor {
+            var req = it.request()
+            if (authToken != null) {
+                req = req.newBuilder().headers(
+                    req.headers()
+                        .newBuilder()
+                        .add("Authorization", """Token $authToken""")
+                        .build()
+                ).build()
+            }
+            it.proceed(req)
+        }
         .build()
 
     val retrofit = Retrofit.Builder()
