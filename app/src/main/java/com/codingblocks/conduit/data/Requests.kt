@@ -14,7 +14,7 @@ data class UserLoginRequest(
     )
 }
 
-data class UserSignupRequest(
+data class UserRegisterRequest(
     @SerializedName("user")
     val user: User
 ) {

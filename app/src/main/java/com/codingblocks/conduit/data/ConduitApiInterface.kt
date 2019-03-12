@@ -13,6 +13,9 @@ interface ConduitApiInterface {
     @POST("users/login")
     fun loginUser(@Body userData: UserLoginRequest): Call<UserResponse>
 
+    @POST("users")
+    fun registerUser(@Body userData: UserRegisterRequest): Call<UserResponse>
+
     @GET("user")
     fun getCurrentUser(): Call<UserResponse>
 }

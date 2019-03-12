@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.codingblocks.conduit.R
+import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment() {
 
@@ -15,7 +17,7 @@ class RegisterFragment : Fragment() {
         fun newInstance() = RegisterFragment()
     }
 
-    private lateinit var viewModel: AuthViewModel
+    var viewModel: AuthViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +28,26 @@ class RegisterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
-        // TODO: Use the ViewModel
+        activity?.let {
+            viewModel = ViewModelProviders.of(it).get(AuthViewModel::class.java)
+        }
+
+        btnRegister.setOnClickListener {
+            viewModel?.registerUser(
+                etEmail.text.toString(),
+                etUsername.text.toString(),
+                etPassword.text.toString()
+            )
+        }
+
+        viewModel?.currentUser?.observe(
+            { lifecycle },
+            {
+                Toast.makeText(context, "Registered as " + it.username, Toast.LENGTH_SHORT).show()
+                activity?.supportFragmentManager?.popBackStack()
+            }
+        )
+
     }
 
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.codingblocks.conduit.data.ConduitClient
 import com.codingblocks.conduit.data.UserLoginRequest
+import com.codingblocks.conduit.data.UserRegisterRequest
 import com.codingblocks.conduit.data.models.User
 import com.codingblocks.conduit.extensions.enqueue
 
@@ -30,7 +31,7 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
 
-        object: MutableLiveData<User>() {
+        object : MutableLiveData<User>() {
             override fun postValue(value: User?) {
                 super.postValue(value)
                 Log.d(TAG, "Saving user token")
@@ -41,8 +42,7 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
 
     fun fetchUserByToken(token: String) {
         ConduitClient.authToken = token
-        ConduitClient.conduitApi.getCurrentUser().enqueue{
-            t, response ->
+        ConduitClient.conduitApi.getCurrentUser().enqueue { t, response ->
             response?.body()?.let {
                 currentUser.postValue(it.user)
             }
@@ -59,6 +59,22 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
                 currentUser.postValue(it.user)
             } ?: run {
                 Log.e("API", "Error logging in user", t)
+            }
+        }
+    }
+
+    fun registerUser(email: String, username: String, password: String) {
+        ConduitClient.conduitApi.registerUser(
+            UserRegisterRequest(
+                UserRegisterRequest.User(
+                    email, password, username
+                )
+            )
+        ).enqueue { t, response ->
+            response?.body()?.let {
+                currentUser.postValue(it.user)
+            } ?: run {
+                Log.e("API", "Error registering in user", t)
             }
         }
     }
