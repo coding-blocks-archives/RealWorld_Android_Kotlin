@@ -1,8 +1,10 @@
 package com.codingblocks.conduit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -18,15 +20,21 @@ import com.codingblocks.conduit.fragments.user.SettingsFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    lateinit var authViewModel: AuthViewModel
+
+    companion object {
+        val TAG = "MainActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
 
-        val authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -38,10 +46,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         authViewModel.currentUser.observe(
             { lifecycle },
-            { it.token?.run {
-                nav_view.menu.clear()
-                nav_view.inflateMenu(R.menu.main_drawer_logged_in)
-            } }
+            {
+                it?.run {
+                    Log.d(TAG, "user changed - login")
+                    nav_view.menu.clear()
+                    nav_view.inflateMenu(R.menu.main_drawer_logged_in)
+
+                    tv_user_name.text = username
+                    tv_user_email.text = email
+
+                } ?: run {
+                    Log.d(TAG, "user changed - logout")
+                    nav_view.menu.clear()
+                    nav_view.inflateMenu(R.menu.main_drawer_logged_out)
+                    Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show()
+                }
+            }
         )
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -79,6 +99,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val container = R.id.framelayout_main_container
+        when (item.itemId) {
+            R.id.menu_item_logout -> {
+                authViewModel.logoutUser()
+                drawer_layout.closeDrawer(GravityCompat.START)
+                return true
+            }
+        }
         with(supportFragmentManager.beginTransaction()) {
             when (item.itemId) {
                 R.id.menu_item_home -> replace(container, HomeFragment.newInstance())

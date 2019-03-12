@@ -62,4 +62,8 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+    fun logoutUser() {
+        currentUser.postValue(null)
+    }
 }

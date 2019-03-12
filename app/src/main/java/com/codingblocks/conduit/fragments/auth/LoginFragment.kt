@@ -16,7 +16,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private lateinit var viewModel: AuthViewModel
+    var viewModel: AuthViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,16 +27,18 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        activity?.let {
+            viewModel = ViewModelProviders.of(it).get(AuthViewModel::class.java)
+        }
 
         btnLogin.setOnClickListener {
-            viewModel.loginUser(
+            viewModel?.loginUser(
                 etEmail.text.toString(),
                 etPassword.text.toString()
             )
         }
 
-        viewModel.currentUser.observe(
+        viewModel?.currentUser?.observe(
             { lifecycle },
             {
                 Toast.makeText(context, "Logged in as " + it.username, Toast.LENGTH_SHORT).show()
