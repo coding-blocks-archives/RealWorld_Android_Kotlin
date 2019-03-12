@@ -9,12 +9,15 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
+import com.codingblocks.conduit.data.models.Article
 import com.codingblocks.conduit.fragments.article.EditArticleFragment
+import com.codingblocks.conduit.fragments.article.ReadArticleFragment
 import com.codingblocks.conduit.viewmodels.AuthViewModel
 import com.codingblocks.conduit.fragments.auth.LoginFragment
 import com.codingblocks.conduit.fragments.auth.RegisterFragment
 import com.codingblocks.conduit.fragments.home.HomeFragment
 import com.codingblocks.conduit.fragments.user.SettingsFragment
+import com.codingblocks.conduit.viewmodels.ArticlesViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -22,6 +25,7 @@ import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var authViewModel: AuthViewModel
+    lateinit var articlesViewModel: ArticlesViewModel
 
     companion object {
         val TAG = "MainActivity"
@@ -32,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        articlesViewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java)
 
 
         val toggle = ActionBarDrawerToggle(
@@ -128,5 +133,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun openArticle(article: Article) {
+        articlesViewModel.currentArticle.value = article
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.framelayout_main_container, ReadArticleFragment.newInstance())
+            .addToBackStack("read_article")
+            .commit()
     }
 }

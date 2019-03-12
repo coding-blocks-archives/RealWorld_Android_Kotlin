@@ -13,6 +13,10 @@ class ArticlesViewModel : ViewModel() {
         MutableLiveData<ArrayList<Article>>()
     }
 
+    val currentArticle: MutableLiveData<Article> by lazy {
+        MutableLiveData<Article>()
+    }
+
     fun refreshGlobalFeed () {
         ConduitClient.conduitApi.getArticles().enqueue { t, response ->
             response?.body()?.let {

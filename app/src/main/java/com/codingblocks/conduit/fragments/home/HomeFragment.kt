@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.codingblocks.conduit.MainActivity
 
 import com.codingblocks.conduit.R
 import com.codingblocks.conduit.adapters.ArticleFeedRecyclerAdapter
@@ -33,6 +34,13 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java)
+
+        articleFeedRecyclerAdapter.onArticleClicked = {
+            article ->
+            activity?.let {
+                (it as MainActivity).openArticle(article)
+            }
+        }
 
         viewModel.globalFeed.observe(
             { lifecycle },

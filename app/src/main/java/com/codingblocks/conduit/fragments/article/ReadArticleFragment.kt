@@ -27,8 +27,10 @@ class ReadArticleFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java)
-        // TODO: Use the ViewModel
+        activity?.let {
+            viewModel = ViewModelProviders.of(it).get(ArticlesViewModel::class.java)
+        }
+
     }
 
 }
