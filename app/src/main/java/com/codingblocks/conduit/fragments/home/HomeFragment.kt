@@ -2,7 +2,6 @@ package com.codingblocks.conduit.fragments.home
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.codingblocks.conduit.R
 import com.codingblocks.conduit.adapters.ArticleFeedRecyclerAdapter
+import com.codingblocks.conduit.viewmodels.ArticlesViewModel
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: ArticlesViewModel
     private var articleFeedRecyclerAdapter = ArticleFeedRecyclerAdapter()
 
     override fun onCreateView(
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java)
 
         viewModel.globalFeed.observe(
             { lifecycle },

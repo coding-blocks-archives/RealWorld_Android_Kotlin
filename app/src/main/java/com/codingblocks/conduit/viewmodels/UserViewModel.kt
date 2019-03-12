@@ -1,4 +1,4 @@
-package com.codingblocks.conduit.fragments.user
+package com.codingblocks.conduit.viewmodels
 
 import androidx.lifecycle.ViewModel;
 

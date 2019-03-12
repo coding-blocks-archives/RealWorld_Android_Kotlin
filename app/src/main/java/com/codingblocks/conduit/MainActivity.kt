@@ -8,11 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.codingblocks.conduit.fragments.article.EditArticleFragment
-import com.codingblocks.conduit.fragments.auth.AuthViewModel
+import com.codingblocks.conduit.viewmodels.AuthViewModel
 import com.codingblocks.conduit.fragments.auth.LoginFragment
 import com.codingblocks.conduit.fragments.auth.RegisterFragment
 import com.codingblocks.conduit.fragments.home.HomeFragment

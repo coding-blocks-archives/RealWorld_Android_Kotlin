@@ -1,4 +1,4 @@
-package com.codingblocks.conduit.fragments.auth
+package com.codingblocks.conduit.viewmodels
 
 import android.app.Application
 import android.content.SharedPreferences

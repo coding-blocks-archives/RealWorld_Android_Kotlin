@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.codingblocks.conduit.R
+import com.codingblocks.conduit.viewmodels.ArticlesViewModel
 
 class ReadArticleFragment : Fragment() {
 
@@ -15,7 +16,7 @@ class ReadArticleFragment : Fragment() {
         fun newInstance() = ReadArticleFragment()
     }
 
-    private lateinit var viewModel: ArticleViewModel
+    private lateinit var viewModel: ArticlesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +27,7 @@ class ReadArticleFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ArticleViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

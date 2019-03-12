@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.codingblocks.conduit.R
+import com.codingblocks.conduit.viewmodels.AuthViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment() {

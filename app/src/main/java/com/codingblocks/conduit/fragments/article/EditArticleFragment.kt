@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 
 import com.codingblocks.conduit.R
+import com.codingblocks.conduit.viewmodels.ArticlesViewModel
 
 
 /**
@@ -21,7 +22,7 @@ class EditArticleFragment : Fragment() {
         fun newInstance() = EditArticleFragment()
     }
 
-    private lateinit var viewModel: ArticleViewModel
+    private lateinit var viewModel: ArticlesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +33,7 @@ class EditArticleFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ArticleViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

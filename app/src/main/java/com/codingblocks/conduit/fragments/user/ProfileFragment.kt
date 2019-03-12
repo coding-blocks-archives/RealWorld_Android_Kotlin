@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.codingblocks.conduit.R
+import com.codingblocks.conduit.viewmodels.UserViewModel
 
 class ProfileFragment : Fragment() {
 
