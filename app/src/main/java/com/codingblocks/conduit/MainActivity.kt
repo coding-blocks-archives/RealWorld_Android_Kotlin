@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.codingblocks.conduit.data.models.Article
 import com.codingblocks.conduit.fragments.article.EditArticleFragment
 import com.codingblocks.conduit.fragments.article.ReadArticleFragment
-import com.codingblocks.conduit.viewmodels.AuthViewModel
+import com.codingblocks.conduit.viewmodels.UsersViewModel
 import com.codingblocks.conduit.fragments.auth.LoginFragment
 import com.codingblocks.conduit.fragments.auth.RegisterFragment
 import com.codingblocks.conduit.fragments.home.HomeFragment
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var authViewModel: AuthViewModel
+    lateinit var authViewModel: UsersViewModel
     lateinit var articlesViewModel: ArticlesViewModel
 
     companion object {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        authViewModel = ViewModelProviders.of(this).get(UsersViewModel::class.java)
         articlesViewModel = ViewModelProviders.of(this).get(ArticlesViewModel::class.java)
 
 

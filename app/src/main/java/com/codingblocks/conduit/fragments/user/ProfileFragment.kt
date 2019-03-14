@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.codingblocks.conduit.R
-import com.codingblocks.conduit.viewmodels.UserViewModel
+import com.codingblocks.conduit.viewmodels.UsersViewModel
 
 class ProfileFragment : Fragment() {
 
@@ -16,7 +16,7 @@ class ProfileFragment : Fragment() {
         fun newInstance() = ProfileFragment()
     }
 
-    private lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: UsersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +27,7 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(UsersViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

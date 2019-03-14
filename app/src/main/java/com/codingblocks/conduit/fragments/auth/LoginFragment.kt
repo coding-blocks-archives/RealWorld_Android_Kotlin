@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.codingblocks.conduit.R
-import com.codingblocks.conduit.viewmodels.AuthViewModel
+import com.codingblocks.conduit.viewmodels.UsersViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
@@ -17,7 +17,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    var viewModel: AuthViewModel? = null
+    var viewModel: UsersViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,7 @@ class LoginFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.let {
-            viewModel = ViewModelProviders.of(it).get(AuthViewModel::class.java)
+            viewModel = ViewModelProviders.of(it).get(UsersViewModel::class.java)
         }
 
         btnLogin.setOnClickListener {

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.codingblocks.conduit.R
-import com.codingblocks.conduit.viewmodels.AuthViewModel
+import com.codingblocks.conduit.viewmodels.UsersViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment() {
@@ -18,7 +18,7 @@ class RegisterFragment : Fragment() {
         fun newInstance() = RegisterFragment()
     }
 
-    var viewModel: AuthViewModel? = null
+    var viewModel: UsersViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +30,7 @@ class RegisterFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.let {
-            viewModel = ViewModelProviders.of(it).get(AuthViewModel::class.java)
+            viewModel = ViewModelProviders.of(it).get(UsersViewModel::class.java)
         }
 
         btnRegister.setOnClickListener {
